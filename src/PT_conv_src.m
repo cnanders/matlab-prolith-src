@@ -19,40 +19,30 @@ dY = dX;
 [dX, dY] = meshgrid(dX, dY);
 
 % If pupil1 data is 2D, convert to 1D list for interpolation with griddata
-[dRows, dCols] = size(pupil1.x);
-if (dRows == 1 || dCols == 1)
-    dX1 = pupil1.x;
-    dY1 = pupil1.y;
-    dZ1 = pupil1.z;
-else
-    dX1 = reshape(pupil1.x, [1, dRows * dCols]);
-    dY1 = reshape(pupil1.y, [1, dRows * dCols]);
-    dZ1 = reshape(pupil1.z, [1, dRows * dCols]);
+if ~isvector(pupil1.x)
+    pupil1.x = pupil1.x(:);
+    pupil1.y = pupil1.y(:);
+    pupil1.z = pupil1.z(:);
 end
     
 % Interpolate pupil1 on output grid
 dZ1Cart = griddata(...
-    dX1, dY1, dZ1, ...
+    pupil1.x, pupil1.y, pupil1.z, ...
     dX, ...
     dY ...
 );
 
 
 % If pupil2 data is 2D, convert to 1D list for interpolation with griddata
-[dRows, dCols] = size(pupil2.x);
-if (dRows == 1 || dCols == 1)
-    dX2 = pupil2.x;
-    dY2 = pupil2.y;
-    dZ2 = pupil2.z;
-else
-    dX2 = reshape(pupil2.x, [1, dRows * dCols]);
-    dY2 = reshape(pupil2.y, [1, dRows * dCols]);
-    dZ2 = reshape(pupil2.z, [1, dRows * dCols]);
+if ~isvector(pupil2.x)
+    pupil2.x = pupil2.x(:);
+    pupil2.y = pupil2.y(:);
+    pupil2.z = pupil2.z(:);
 end
 
 % Interpolate pupil2 on output grid
 dZ2Cart = griddata(...
-    dX2, dY2, dZ2, ...
+    pupil2.x, pupil2.y, pupil2.z, ...
     dX, ...
     dY ...
 );
@@ -60,8 +50,8 @@ dZ2Cart = griddata(...
 dZ = conv2(dZ1Cart, dZ2Cart, 'same');
 dZ = dZ ./ max(max(dZ)); 
 
-pupil.x = reshape(dX, [1, dPixels * dPixels]);
-pupil.y = reshape(dY, [1, dPixels * dPixels]);
-pupil.z = reshape(dZ, [1, dPixels * dPixels]);
+pupil.x = dX(:);
+pupil.y = dY(:);
+pupil.z = dZ(:);
 
 end
