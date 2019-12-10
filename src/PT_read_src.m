@@ -44,6 +44,12 @@ x = data(1,:);
 y = data(2,:);
 z = data(3,:);
 
+% kill anything that is very low intentisy
+indexLow = z < 0.01;
+x(indexLow) = [];
+y(indexLow) = [];
+z(indexLow) = [];
+
 % Check the contents of x and y and try to determine if we have a two
 % dimensional bitmap
 
