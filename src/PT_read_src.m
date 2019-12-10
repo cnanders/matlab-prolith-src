@@ -20,7 +20,7 @@ else
 end
 
 if ~exist(filename, 'file')
-    error('File "%s" not found!', filename);
+    error('PT_read_src File "%s" not found!', filename);
 end
 
 fid = fopen(filename, 'r'); % Rely on fopen's error handling...
