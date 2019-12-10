@@ -46,6 +46,11 @@ z = data(3,:);
 
 % Check the contents of x and y and try to determine if we have a two
 % dimensional bitmap
+
+% CA skip this whole bitmap thing.  I don't like the idea of outputting
+% two types of data (list vs. matrix)
+
+%{
 n = numel(unique(x));
 m = numel(unique(y));
 if n*m == numel(z)
@@ -66,7 +71,7 @@ if n*m == numel(z)
     % Replace old one dimensional arrays with new arrays
     x = newX; y = newY; z = newZ;
 end
-
+%}
 
 % Assemble the final pupil structure
 if numel(header) > 0
