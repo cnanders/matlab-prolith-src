@@ -32,6 +32,10 @@ dZ1Cart = griddata(...
     dY ...
 );
 
+% griddata returns NaN when the input data source has
+% no information at the provided grid point
+dZ1Cart(isnan(dZ1Cart)) = 0; 
+
 
 % If pupil2 data is 2D, convert to 1D list for interpolation with griddata
 if ~isvector(pupil2.x)
@@ -46,6 +50,10 @@ dZ2Cart = griddata(...
     dX, ...
     dY ...
 );
+
+% griddata returns NaN when the input data source has
+% no information at the provided grid point
+dZ2Cart(isnan(dZ2Cart)) = 0; 
 
 dZ = conv2(dZ1Cart, dZ2Cart, 'same');
 dZ = dZ ./ max(max(dZ)); 
