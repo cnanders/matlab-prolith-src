@@ -15,11 +15,12 @@ MAXHEADERLINES = 5000;
 if nargin > 0
     filename = varargin{1};
 else
-    filename = uigetfile('*.src', 'Select .src file ...');
+    [filename, pathname] = uigetfile('*.src', 'Select .src file ...');
+    filename = fullfile(pathname, filename);
 end
 
 if ~exist(filename, 'file')
-    error('File "%s" not found!', filename);
+    error('PT_read_src File "%s" not found!', filename);
 end
 
 fid = fopen(filename, 'r'); % Rely on fopen's error handling...
