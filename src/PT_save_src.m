@@ -13,7 +13,8 @@ function PT_save_src(pupil, filename)
 
 % Check if we got a file
 if ~exist('filename', 'var') || isempty(filename)
-    filename = uiputfile('*.src', 'Define .src file ...');
+    [filename, pathname] = uiputfile('*.src', 'Define .src file ...'); 
+    filename = fullfile(pathname, filename);
 end
 
 M(:,1) = pupil.x(:);

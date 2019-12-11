@@ -60,9 +60,11 @@ end
 % Check if we are dealing with an array or bitmap structure
 if isvector(pupil.z)
     % Scatter plot
+    figure
     scatter(pupil.x, pupil.y, [], pupil.z, 'filled');
 else
     % Bitmap plot
+    figure
     imagesc(...
         unique(pupil.x, 'stable'), ...
         unique(pupil.y, 'stable'), ...
