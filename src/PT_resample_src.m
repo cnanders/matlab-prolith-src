@@ -42,13 +42,13 @@ x = dX(:);
 y = dY(:);
 z = dZ(:);
 
-%{
+
 % kill anything that is very low intentisy
-indexLow = z < 0.01;
+indexLow = z < 0.7;
 x(indexLow) = [];
 y(indexLow) = [];
 z(indexLow) = [];
-%}
+
 
 pupil.x = x;
 pupil.y = y;
